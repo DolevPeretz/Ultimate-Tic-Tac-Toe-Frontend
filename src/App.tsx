@@ -23,15 +23,33 @@ const App: React.FC = () => {
           backgroundColor: "background.default", // ורוד בייבי מתוך ערכת הנושא
         }}
       >
-        <Typography variant="h4" gutterBottom>
-          XO² Game
-        </Typography>
-        <MainBoard /> {/* הלוח הראשי */}
-        <Box mt={4}>
+        {/* כותרת המשחק עם הכפתור */}
+        <Box
+          sx={{
+            display: "flex", // סידור שורה
+            alignItems: "center", // יישור אנכי
+            justifyContent: "space-between", // מרווח בין הכותרת לכפתור
+            width: "100%", // שימוש ברוחב מלא
+            maxWidth: "1000px", // הגבלת הרוחב המרבי
+            paddingX: 2, // ריווח אופקי
+            marginBottom: 4, // מרווח מתחת לכותרת
+          }}
+        >
+          <Typography
+            variant="h4"
+            sx={{
+              color: "#FFFFFF", // צבע לבן
+              textAlign: "center",
+              fontWeight: "bold", // משקל גופן מודגש
+            }}
+          >
+            XO² Game
+          </Typography>
           <Button variant="contained" color="primary" onClick={resetGame}>
             Reset Game
           </Button>
         </Box>
+        <MainBoard /> {/* הלוח הראשי */}
       </Box>
     </ThemeProvider>
   );

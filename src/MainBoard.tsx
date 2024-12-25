@@ -10,17 +10,17 @@ const MainBoard: React.FC = () => {
       items={mainBoardItems}
       renderItem={(item, index) => <MiniBoard key={index} />}
       style={{
-        backgroundColor: "#FFC0CB", // ורוד בייבי ללוח הראשי
-        padding: "40px", // ריווח פנימי ללוח הראשי
-        height: "auto", // גובה דינמי
-        width: "90%", // הרחבת רוחב הלוח הראשי
+        // backgroundColor: "#D8BEBE", // ורוד עם גוון אפור
+        padding: "20px", // ריווח פנימי ללוח הראשי
+        width: "1000px", // רוחב קבוע ללוח הראשי
+        height: "1000px", // גובה קבוע ללוח הראשי
         display: "grid", // שימוש ב-grid CSS
         gridTemplateColumns: "repeat(3, 1fr)", // 3 עמודות
-        gap: "40px", // ריווח גדול יותר בין הלוחות הפנימיים
+        gap: "8px", // ריווח קטן יותר בין הלוחות הפנימיים
         justifyContent: "center", // מיקום במרכז האופקי
         alignItems: "center", // מיקום במרכז האנכי
-        borderRadius: "16px", // פינות מעוגלות ללוח הראשי
-        boxShadow: "0px 6px 15px rgba(0, 0, 0, 0.2)", // צל מודגש ללוח הראשי
+        borderRadius: "8px", // פינות מעוגלות ללוח הראשי
+        // boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.3)", // צל ללוח הראשי
       }}
     />
   );

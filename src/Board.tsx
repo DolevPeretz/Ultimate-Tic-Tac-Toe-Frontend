@@ -15,7 +15,7 @@ const Board: React.FC<BoardProps> = ({ items, renderItem, style }) => {
       sx={{
         padding: 2,
         borderRadius: 4,
-        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.15)", // צל עדין
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.50)", // צל עדין
         ...style, // מיזוג סגנונות מותאמים אישית
       }}
     >
