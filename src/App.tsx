@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import MainBoard from "./MainBoard"; // ייבוא הלוח הראשי
+import { Box, Typography, Button } from "@mui/material";
+import theme from "./theme"; // ייבוא ערכת הנושא
 
-function App() {
+const App: React.FC = () => {
+  const resetGame = () => {
+    window.location.reload(); // איפוס המשחק
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box
+        sx={{
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: 2,
+          backgroundColor: "background.default", // ורוד בייבי מתוך ערכת הנושא
+        }}
+      >
+        <Typography variant="h4" gutterBottom>
+          XO² Game
+        </Typography>
+        <MainBoard /> {/* הלוח הראשי */}
+        <Box mt={4}>
+          <Button variant="contained" color="primary" onClick={resetGame}>
+            Reset Game
+          </Button>
+        </Box>
+      </Box>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
