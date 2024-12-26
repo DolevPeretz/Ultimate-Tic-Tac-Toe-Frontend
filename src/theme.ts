@@ -3,8 +3,7 @@ import { createTheme } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
     background: {
-      default: "#FFC0CB", // ורוד בייבי לכל הרקע הראשי
-      // paper: "rgba(255, 192, 203, 0.7)", // ורוד בייבי שקוף ללוחות הפנימיים
+      default: "rgba(123, 155, 250, 0.7)",  // ורוד בייבי לכל הרקע הראשי
     },
     primary: {
       main: "#1976d2", // כחול לכפתורים ראשיים

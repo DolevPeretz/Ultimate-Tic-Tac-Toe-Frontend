@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "@mui/material/Button";
+import styles from "./style"; // ייבוא הסגנונות
 
 interface SquareProps {
   value: string | null;
@@ -8,18 +9,7 @@ interface SquareProps {
 
 const Square: React.FC<SquareProps> = ({ value, onClick }) => {
   return (
-    <Button
-      variant="outlined"
-      onClick={onClick}
-      sx={{
-        width: 50,
-        height: 50,
-        fontSize: "1.5rem",
-        backgroundColor: "#f0f0f0", // רקע לתאים
-        borderRadius: 1, // פינות קטנות מעוגלות
-        border: "1px solid #ccc", // גבול עדין
-      }}
-    >
+    <Button variant="outlined" onClick={onClick} sx={styles.squareButton}>
       {value}
     </Button>
   );

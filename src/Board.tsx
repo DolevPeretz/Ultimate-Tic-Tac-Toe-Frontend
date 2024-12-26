@@ -1,5 +1,6 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
+import styles from "./style"; // ייבוא הסגנונות
 
 interface BoardProps {
   items: any[]; // מערך התאים בלוח
@@ -13,10 +14,8 @@ const Board: React.FC<BoardProps> = ({ items, renderItem, style }) => {
       container
       spacing={1}
       sx={{
-        padding: 2,
-        borderRadius: 4,
-        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.50)", // צל עדין
-        ...style, // מיזוג סגנונות מותאמים אישית
+        ...styles.board, 
+        ...style, 
       }}
     >
       {items.map((item, index) => (
