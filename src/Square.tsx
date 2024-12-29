@@ -1,15 +1,13 @@
 import React from "react";
 import Button from "@mui/material/Button";
-import styles from "./style"; 
+import { squareButtonStyle } from "./style";
 
-interface SquareProps {
-  value: string | null;
-  onClick: () => void;
-}
-
-const Square: React.FC<SquareProps> = ({ value, onClick }) => {
+const Square: React.FC<{ value: string | null; onClick: () => void }> = ({
+  value,
+  onClick,
+}) => {
   return (
-    <Button variant="outlined" onClick={onClick} sx={styles.squareButton}>
+    <Button sx={squareButtonStyle} onClick={onClick}>
       {value}
     </Button>
   );

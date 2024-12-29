@@ -1,43 +1,47 @@
 import React, { useState } from "react";
-import { ThemeProvider, CssBaseline, Box, Typography, Button } from "@mui/material";
+import { ThemeProvider, CssBaseline } from "@mui/material";
 import MainBoard from "./MainBoard";
 import theme from "./theme";
-import styles from "./style";
+import {
+  AppContainer,
+  HeaderContainer,
+  Title,
+  ResetButton,
+  MainBoardContainer,
+} from "./style";
 
 const App: React.FC = () => {
-  const [mainBoard, setMainBoard] = useState<string[][]>(Array(9).fill(Array(9).fill(null))); 
-  const [isXNext, setIsXNext] = useState(true); 
+  const [mainBoard, setMainBoard] = useState<string[][]>(Array(9).fill(Array(9).fill(null)));
+  const [isXNext, setIsXNext] = useState(true);
 
   const handleMove = (miniBoardIndex: number, newMiniBoard: string[]) => {
     const updatedMainBoard = [...mainBoard];
     updatedMainBoard[miniBoardIndex] = newMiniBoard;
     setMainBoard(updatedMainBoard);
-    setIsXNext(!isXNext); 
+    setIsXNext(!isXNext);
   };
 
   const resetGame = () => {
-    setMainBoard(Array(9).fill(Array(9).fill(null))); 
-    setIsXNext(true); 
+    setMainBoard(Array(9).fill(Array(9).fill(null)));
+    setIsXNext(true);
   };
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={styles.appContainer}>
-        <Box sx={styles.headerContainer}>
-          <Typography variant="h4" sx={styles.title}>
-            XO² Game
-          </Typography>
-          <Button variant="contained" color="primary" onClick={resetGame}>
+      <AppContainer>
+        <HeaderContainer>
+          <Title variant="h3">XO² Game</Title>
+          <ResetButton variant="contained" onClick={resetGame}>
             Reset Game
-          </Button>
-        </Box>
+          </ResetButton>
+        </HeaderContainer>
         <MainBoard
           mainBoard={mainBoard}
           isXNext={isXNext}
           onMove={handleMove}
         />
-      </Box>
+      </AppContainer>
     </ThemeProvider>
   );
 };

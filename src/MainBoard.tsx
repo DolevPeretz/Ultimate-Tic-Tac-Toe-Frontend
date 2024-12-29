@@ -1,7 +1,6 @@
 import React from "react";
 import Board from "./TemplateBoard";
 import MiniBoard from "./MiniBoard";
-import styles from "./style";
 
 interface MainBoardProps {
   mainBoard: string[][];
@@ -13,6 +12,7 @@ const MainBoard: React.FC<MainBoardProps> = ({ mainBoard, isXNext, onMove }) => 
   return (
     <Board
       items={mainBoard}
+      className="MainBoard"
       renderItem={(miniBoard, index) => (
         <MiniBoard
           key={index}
@@ -21,7 +21,6 @@ const MainBoard: React.FC<MainBoardProps> = ({ mainBoard, isXNext, onMove }) => 
           onUpdate={(newMiniBoard) => onMove(index, newMiniBoard)}
         />
       )}
-      style={styles.mainBoard}
     />
   );
 };
