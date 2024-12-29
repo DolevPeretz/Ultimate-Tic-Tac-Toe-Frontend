@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "@mui/material/Button";
-import styles from "./style"; // ייבוא הסגנונות
+import styles from "./style"; 
 
 interface SquareProps {
   value: string | null;

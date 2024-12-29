@@ -1,11 +1,11 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import styles from "./style"; // ייבוא הסגנונות
+import styles from "./style";
 
 interface BoardProps {
-  items: any[]; // מערך התאים בלוח
-  renderItem: (item: any, index: number) => React.ReactNode; // פונקציה ליצירת תוכן לכל תא
-  style?: React.CSSProperties; // עיצוב מותאם אישית (אופציונלי)
+  items: any[]; 
+  renderItem: (item: any, index: number) => React.ReactNode; 
+  style?: React.CSSProperties;
 }
 
 const Board: React.FC<BoardProps> = ({ items, renderItem, style }) => {
@@ -14,8 +14,8 @@ const Board: React.FC<BoardProps> = ({ items, renderItem, style }) => {
       container
       spacing={1}
       sx={{
-        ...styles.board, 
-        ...style, 
+        ...styles.board,
+        ...style,
       }}
     >
       {items.map((item, index) => (

@@ -1,18 +1,20 @@
-import React, { useState } from "react";
-import Board from "./Board";
+import React from "react";
+import Board from "./TemplateBoard";
 import Square from "./Square";
-import styles from "./style"; // ייבוא הסגנונות
+import styles from "./style";
 
-const MiniBoard: React.FC = () => {
-  const [board, setBoard] = useState<(string | null)[]>(Array(9).fill(null));
-  const [isXNext, setIsXNext] = useState<boolean>(true);
+interface MiniBoardProps {
+  board: string[];
+  isXNext: boolean; 
+  onUpdate: (newBoard: string[]) => void;
+}
 
+const MiniBoard: React.FC<MiniBoardProps> = ({ board, isXNext, onUpdate }) => {
   const handleClick = (index: number) => {
-    if (board[index]) return; // למנוע שינוי בתא שכבר נבחר
-    const newBoard = [...board];
-    newBoard[index] = isXNext ? "X" : "O";
-    setBoard(newBoard);
-    setIsXNext(!isXNext);
+    if (board[index]) return; 
+    const updatedBoard = [...board];
+    updatedBoard[index] = isXNext ? "X" : "O"; 
+    onUpdate(updatedBoard); 
   };
 
   return (
@@ -21,7 +23,7 @@ const MiniBoard: React.FC = () => {
       renderItem={(value, index) => (
         <Square value={value} onClick={() => handleClick(index)} />
       )}
-      style={styles.miniBoard} 
+      style={styles.miniBoard}
     />
   );
 };

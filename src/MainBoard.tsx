@@ -1,16 +1,27 @@
 import React from "react";
-import Board from "./Board";
+import Board from "./TemplateBoard";
 import MiniBoard from "./MiniBoard";
-import styles from "./style"; // ייבוא הסגנונות
+import styles from "./style";
 
-const MainBoard: React.FC = () => {
-  const mainBoardItems = Array(9).fill(null); // הלוח הראשי עם 9 לוחות פנימיים
+interface MainBoardProps {
+  mainBoard: string[][];
+  isXNext: boolean;
+  onMove: (miniBoardIndex: number, newMiniBoard: string[]) => void;
+}
 
+const MainBoard: React.FC<MainBoardProps> = ({ mainBoard, isXNext, onMove }) => {
   return (
     <Board
-      items={mainBoardItems}
-      renderItem={(item, index) => <MiniBoard key={index} />}
-      style={styles.mainBoard} // שימוש בסגנונות מ-styles.ts
+      items={mainBoard}
+      renderItem={(miniBoard, index) => (
+        <MiniBoard
+          key={index}
+          board={miniBoard}
+          isXNext={isXNext}
+          onUpdate={(newMiniBoard) => onMove(index, newMiniBoard)}
+        />
+      )}
+      style={styles.mainBoard}
     />
   );
 };
