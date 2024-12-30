@@ -2,28 +2,30 @@ import React, { useState } from "react";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import MainBoard from "./MainBoard";
 import theme from "./theme";
+import { Player } from "./PlayerEnum";
 import {
   AppContainer,
   HeaderContainer,
   Title,
   ResetButton,
-  MainBoardContainer,
 } from "./style";
 
 const App: React.FC = () => {
-  const [mainBoard, setMainBoard] = useState<string[][]>(Array(9).fill(Array(9).fill(null)));
-  const [isXNext, setIsXNext] = useState(true);
+  const [mainBoard, setMainBoard] = useState<(Player | null)[][]>(
+    Array(9).fill(Array(9).fill(null))
+  );
+  const [currentPlayer, setCurrentPlayer] = useState<Player>(Player.X);
 
-  const handleMove = (miniBoardIndex: number, newMiniBoard: string[]) => {
+  const handleMove = (miniBoardIndex: number, newMiniBoard: (Player | null)[]) => {
     const updatedMainBoard = [...mainBoard];
     updatedMainBoard[miniBoardIndex] = newMiniBoard;
     setMainBoard(updatedMainBoard);
-    setIsXNext(!isXNext);
+    setCurrentPlayer(currentPlayer === Player.X ? Player.O : Player.X);
   };
 
   const resetGame = () => {
     setMainBoard(Array(9).fill(Array(9).fill(null)));
-    setIsXNext(true);
+    setCurrentPlayer(Player.X);
   };
 
   return (
@@ -38,7 +40,7 @@ const App: React.FC = () => {
         </HeaderContainer>
         <MainBoard
           mainBoard={mainBoard}
-          isXNext={isXNext}
+          currentPlayer={currentPlayer}
           onMove={handleMove}
         />
       </AppContainer>

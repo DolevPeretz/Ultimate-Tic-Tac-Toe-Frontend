@@ -1,27 +1,30 @@
 import React from "react";
-import Board from "./TemplateBoard";
 import MiniBoard from "./MiniBoard";
+import { Player } from "./PlayerEnum";
+import { MainBoardContainer } from "./style";
 
 interface MainBoardProps {
-  mainBoard: string[][];
-  isXNext: boolean;
-  onMove: (miniBoardIndex: number, newMiniBoard: string[]) => void;
+  mainBoard: (Player | null)[][]; 
+  currentPlayer: Player; 
+  onMove: (miniBoardIndex: number, newMiniBoard: (Player | null)[]) => void;
 }
 
-const MainBoard: React.FC<MainBoardProps> = ({ mainBoard, isXNext, onMove }) => {
+const MainBoard: React.FC<MainBoardProps> = ({
+  mainBoard,
+  currentPlayer,
+  onMove,
+}) => {
   return (
-    <Board
-      items={mainBoard}
-      className="MainBoard"
-      renderItem={(miniBoard, index) => (
+    <MainBoardContainer>
+      {mainBoard.map((miniBoard, index) => (
         <MiniBoard
           key={index}
           board={miniBoard}
-          isXNext={isXNext}
+          currentPlayer={currentPlayer}
           onUpdate={(newMiniBoard) => onMove(index, newMiniBoard)}
         />
-      )}
-    />
+      ))}
+    </MainBoardContainer>
   );
 };
 

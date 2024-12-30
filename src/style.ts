@@ -60,3 +60,6 @@ export const MainBoardContainer = styled(Box)(({ theme }) => ({
   borderRadius: "8px",
   backgroundColor: "rgba(195, 209, 252, 0.7)",
 }));
+
+
+

@@ -1,19 +1,24 @@
 import React from "react";
 import Board from "./TemplateBoard";
 import Square from "./Square";
+import { Player } from "./PlayerEnum";
 
 interface MiniBoardProps {
-  board: string[];
-  isXNext: boolean;
-  onUpdate: (newBoard: string[]) => void;
+  board: (Player | null)[]; 
+  currentPlayer: Player;
+  onUpdate: (newBoard: (Player | null)[]) => void; 
 }
 
-const MiniBoard: React.FC<MiniBoardProps> = ({ board, isXNext, onUpdate }) => {
+const MiniBoard: React.FC<MiniBoardProps> = ({
+  board,
+  currentPlayer,
+  onUpdate,
+}) => {
   const handleClick = (index: number) => {
     if (board[index]) return;
     const updatedBoard = [...board];
-    updatedBoard[index] = isXNext ? "X" : "O";
-    onUpdate(updatedBoard);
+    updatedBoard[index] = currentPlayer; 
+    onUpdate(updatedBoard); 
   };
 
   return (
