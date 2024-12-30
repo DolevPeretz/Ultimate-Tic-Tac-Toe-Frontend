@@ -16,11 +16,20 @@ const App: React.FC = () => {
   );
   const [currentPlayer, setCurrentPlayer] = useState<Player>(Player.X);
 
-  const handleMove = (miniBoardIndex: number, newMiniBoard: (Player | null)[]) => {
+  const handleMove = (
+    miniBoardIndex: number,
+    newMiniBoard: (Player | null)[]
+  ) => {
     const updatedMainBoard = [...mainBoard];
     updatedMainBoard[miniBoardIndex] = newMiniBoard;
+
+    // עדכון המצב של הלוח
     setMainBoard(updatedMainBoard);
-    setCurrentPlayer(currentPlayer === Player.X ? Player.O : Player.X);
+
+    // החלפת השחקן
+    setCurrentPlayer((prevPlayer) =>
+      prevPlayer === Player.X ? Player.O : Player.X
+    );
   };
 
   const resetGame = () => {

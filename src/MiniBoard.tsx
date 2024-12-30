@@ -7,12 +7,14 @@ interface MiniBoardProps {
   board: (Player | null)[]; 
   currentPlayer: Player;
   onUpdate: (newBoard: (Player | null)[]) => void; 
+  isActive: boolean; // האם הלוח פעיל
 }
 
 const MiniBoard: React.FC<MiniBoardProps> = ({
   board,
   currentPlayer,
   onUpdate,
+  isActive,
 }) => {
   const [winner, setWinner] = useState<Player | null>(null);
 
@@ -46,7 +48,7 @@ const MiniBoard: React.FC<MiniBoardProps> = ({
   }, [board]);
 
   const handleClick = (index: number) => {
-    if (board[index] || winner) return; // אם התא תפוס או שיש מנצח, לא עושים כלום
+    if (!isActive || board[index] || winner) return; // אם הלוח לא פעיל, התא תפוס או שיש מנצח
     const updatedBoard = [...board];
     updatedBoard[index] = currentPlayer; 
     onUpdate(updatedBoard); 
@@ -55,10 +57,12 @@ const MiniBoard: React.FC<MiniBoardProps> = ({
   return (
     <div
       style={{
-        backgroundColor: winner === Player.X ? "lightgreen" : winner === Player.O ? "yellow" : "transparent",
+        backgroundColor: winner === Player.X ? "lightgreen" : winner === Player.O ? "yellow" : isActive ? "white" : "lightgray",
         borderRadius: "12px",
         padding: "10px",
         transition: "background-color 0.3s ease",
+        opacity: isActive ? 1 : 0.5, // אם הלוח לא פעיל, האופסיטי יורד
+        pointerEvents: isActive ? "auto" : "none", // אם הלוח לא פעיל, מניעת קליקים
       }}
     >
       <Board
