@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ThemeProvider, CssBaseline } from "@mui/material";
+import { ThemeProvider, CssBaseline, Typography } from "@mui/material";
 import MainBoard from "./MainBoard";
 import theme from "./theme";
 import { Player } from "./PlayerEnum";
@@ -15,6 +15,8 @@ const App: React.FC = () => {
     Array(9).fill(Array(9).fill(null))
   );
   const [currentPlayer, setCurrentPlayer] = useState<Player>(Player.X);
+  const [activeBoardIndex, setActiveBoardIndex] = useState<number | null>(null);
+  const [isReset, setIsReset] = useState(false); // מצב חדש - האם המשחק עבר איפוס
 
   const handleMove = (
     miniBoardIndex: number,
@@ -30,11 +32,23 @@ const App: React.FC = () => {
     setCurrentPlayer((prevPlayer) =>
       prevPlayer === Player.X ? Player.O : Player.X
     );
+
+    // זיהוי אם המשחק בלוח הנוכחי הסתיים
+    const isBoardFull = newMiniBoard.every((cell) => cell !== null);
+    if (isBoardFull) {
+      setActiveBoardIndex(null); // אפשר לבחור לוח חדש
+    } else {
+      setActiveBoardIndex(miniBoardIndex); // המשך לשחק בלוח הנוכחי
+    }
+
+    setIsReset(false); // מבטלים את מצב האיפוס
   };
 
   const resetGame = () => {
-    setMainBoard(Array(9).fill(Array(9).fill(null)));
-    setCurrentPlayer(Player.X);
+    setMainBoard(Array(9).fill(Array(9).fill(null))); // איפוס הלוח הראשי
+    setCurrentPlayer(Player.X); // אתחול לשחקן הראשון
+    setActiveBoardIndex(null); // איפוס הלוח הפעיל
+    setIsReset(true); // מציין שהמשחק עבר איפוס
   };
 
   return (
@@ -47,10 +61,19 @@ const App: React.FC = () => {
             Reset Game
           </ResetButton>
         </HeaderContainer>
+        <Typography variant="h6" sx={{ marginBottom: 2 }}>
+          The Current Player is: {currentPlayer}
+        </Typography>
+        <Typography variant="subtitle1" sx={{ marginBottom: 4 }}>
+          Next Turn: {currentPlayer === Player.X ? Player.O : Player.X}
+        </Typography>
         <MainBoard
           mainBoard={mainBoard}
           currentPlayer={currentPlayer}
           onMove={handleMove}
+          activeBoardIndex={activeBoardIndex}
+          setActiveBoardIndex={setActiveBoardIndex}
+          isReset={isReset} // העברת isReset ל-MainBoard
         />
       </AppContainer>
     </ThemeProvider>

@@ -8,6 +8,7 @@ interface MiniBoardProps {
   currentPlayer: Player;
   onUpdate: (newBoard: (Player | null)[]) => void; 
   isActive: boolean; // האם הלוח פעיל
+  isReset: boolean; // האם המשחק עבר איפוס
 }
 
 const MiniBoard: React.FC<MiniBoardProps> = ({
@@ -15,6 +16,7 @@ const MiniBoard: React.FC<MiniBoardProps> = ({
   currentPlayer,
   onUpdate,
   isActive,
+  isReset,
 }) => {
   const [winner, setWinner] = useState<Player | null>(null);
 
@@ -41,11 +43,15 @@ const MiniBoard: React.FC<MiniBoardProps> = ({
   };
 
   useEffect(() => {
-    const calculatedWinner = checkWinner(board);
-    if (calculatedWinner) {
-      setWinner(calculatedWinner); // עדכון המנצח
+    if (isReset) {
+      setWinner(null); // איפוס המנצח אם המשחק עבר איפוס
+    } else {
+      const calculatedWinner = checkWinner(board);
+      if (calculatedWinner) {
+        setWinner(calculatedWinner); // עדכון המנצח
+      }
     }
-  }, [board]);
+  }, [board, isReset]);
 
   const handleClick = (index: number) => {
     if (!isActive || board[index] || winner) return; // אם הלוח לא פעיל, התא תפוס או שיש מנצח

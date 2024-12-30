@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import MiniBoard from "./MiniBoard";
 import { Player } from "./PlayerEnum";
 import { MainBoardContainer } from "./style";
@@ -7,15 +7,19 @@ interface MainBoardProps {
   mainBoard: (Player | null)[][]; 
   currentPlayer: Player; 
   onMove: (miniBoardIndex: number, newMiniBoard: (Player | null)[]) => void;
+  activeBoardIndex: number | null; // לוח פעיל
+  setActiveBoardIndex: React.Dispatch<React.SetStateAction<number | null>>; // פונקציה לעדכון לוח פעיל
+  isReset: boolean; // האם המשחק עבר איפוס
 }
 
 const MainBoard: React.FC<MainBoardProps> = ({
   mainBoard,
   currentPlayer,
   onMove,
+  activeBoardIndex,
+  setActiveBoardIndex,
+  isReset,
 }) => {
-  const [activeBoardIndex, setActiveBoardIndex] = useState<number | null>(null); // ניהול לוח פעיל
-
   const handleMiniBoardUpdate = (
     miniBoardIndex: number,
     newMiniBoard: (Player | null)[]
@@ -67,6 +71,7 @@ const MainBoard: React.FC<MainBoardProps> = ({
           currentPlayer={currentPlayer}
           onUpdate={(newMiniBoard) => handleMiniBoardUpdate(index, newMiniBoard)}
           isActive={activeBoardIndex === null || activeBoardIndex === index} // רק הלוח הפעיל ניתן ללחיצה
+          isReset={isReset} // העברת המידע אם המשחק עבר איפוס
         />
       ))}
     </MainBoardContainer>
