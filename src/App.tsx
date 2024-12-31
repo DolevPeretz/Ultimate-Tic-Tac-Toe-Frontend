@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ThemeProvider, CssBaseline, Typography } from "@mui/material";
+import { ThemeProvider, CssBaseline } from "@mui/material";
 import MainBoard from "./MainBoard";
 import theme from "./theme";
 import { Player } from "./PlayerEnum";
@@ -15,8 +15,7 @@ const App: React.FC = () => {
     Array(9).fill(Array(9).fill(null))
   );
   const [currentPlayer, setCurrentPlayer] = useState<Player>(Player.X);
-  const [activeBoardIndex, setActiveBoardIndex] = useState<number | null>(null);
-  const [isReset, setIsReset] = useState(false); // מצב חדש - האם המשחק עבר איפוס
+  const [isReset, setIsReset] = useState(false); // האם המשחק באיפוס
 
   const handleMove = (
     miniBoardIndex: number,
@@ -25,30 +24,19 @@ const App: React.FC = () => {
     const updatedMainBoard = [...mainBoard];
     updatedMainBoard[miniBoardIndex] = newMiniBoard;
 
-    // עדכון המצב של הלוח
     setMainBoard(updatedMainBoard);
 
-    // החלפת השחקן
+    // עדכון השחקן הנוכחי
     setCurrentPlayer((prevPlayer) =>
       prevPlayer === Player.X ? Player.O : Player.X
     );
-
-    // זיהוי אם המשחק בלוח הנוכחי הסתיים
-    const isBoardFull = newMiniBoard.every((cell) => cell !== null);
-    if (isBoardFull) {
-      setActiveBoardIndex(null); // אפשר לבחור לוח חדש
-    } else {
-      setActiveBoardIndex(miniBoardIndex); // המשך לשחק בלוח הנוכחי
-    }
-
-    setIsReset(false); // מבטלים את מצב האיפוס
   };
 
   const resetGame = () => {
     setMainBoard(Array(9).fill(Array(9).fill(null))); // איפוס הלוח הראשי
-    setCurrentPlayer(Player.X); // אתחול לשחקן הראשון
-    setActiveBoardIndex(null); // איפוס הלוח הפעיל
-    setIsReset(true); // מציין שהמשחק עבר איפוס
+    setCurrentPlayer(Player.X); // איפוס השחקן
+    setIsReset(true); // להפעיל את מצב האיפוס
+    setTimeout(() => setIsReset(false), 100); // להסיר את האיפוס לאחר זמן קצר
   };
 
   return (
@@ -61,19 +49,17 @@ const App: React.FC = () => {
             Reset Game
           </ResetButton>
         </HeaderContainer>
-        <Typography variant="h6" sx={{ marginBottom: 2 }}>
+
+        {/* הצגת השחקן הנוכחי */}
+        <p style={{ fontSize: "1.2rem", fontWeight: "bold", margin: "10px 0" }}>
           The Current Player is: {currentPlayer}
-        </Typography>
-        <Typography variant="subtitle1" sx={{ marginBottom: 4 }}>
-          Next Turn: {currentPlayer === Player.X ? Player.O : Player.X}
-        </Typography>
+        </p>
+
         <MainBoard
           mainBoard={mainBoard}
           currentPlayer={currentPlayer}
           onMove={handleMove}
-          activeBoardIndex={activeBoardIndex}
-          setActiveBoardIndex={setActiveBoardIndex}
-          isReset={isReset} // העברת isReset ל-MainBoard
+          isReset={isReset} // העברת מידע על מצב האיפוס
         />
       </AppContainer>
     </ThemeProvider>
