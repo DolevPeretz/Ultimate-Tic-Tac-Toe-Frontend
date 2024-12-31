@@ -65,7 +65,7 @@ const MiniBoard: React.FC<MiniBoardProps> = ({
           winner === Player.X
             ? "lightgreen"
             : winner === Player.O
-            ? "yellow"
+            ? "red"
             : "white",
         borderRadius: "12px",
         padding: "10px",

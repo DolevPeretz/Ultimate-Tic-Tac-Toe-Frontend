@@ -3,12 +3,7 @@ import { ThemeProvider, CssBaseline } from "@mui/material";
 import MainBoard from "./MainBoard";
 import theme from "./theme";
 import { Player } from "./PlayerEnum";
-import {
-  AppContainer,
-  HeaderContainer,
-  Title,
-  ResetButton,
-} from "./style";
+import { AppContainer, HeaderContainer, Title, ResetButton } from "./style";
 
 const App: React.FC = () => {
   const [mainBoard, setMainBoard] = useState<(Player | null)[][]>(
@@ -44,7 +39,7 @@ const App: React.FC = () => {
       <CssBaseline />
       <AppContainer>
         <HeaderContainer>
-          <Title variant="h3">XO² Game</Title>
+          <Title variant="h3">Ultimate-Tic-Tac-Toe-Frontend</Title>
           <ResetButton variant="contained" onClick={resetGame}>
             Reset Game
           </ResetButton>
