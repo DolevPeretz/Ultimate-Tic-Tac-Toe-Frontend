@@ -10,7 +10,6 @@ interface MainBoardProps {
   isReset: boolean; 
 }
 
-// פונקציה לבדיקת נצחון בלוח מיני
 const getMiniBoardWinner = (miniBoard: (Player | null)[]): Player | null => {
   const winningCombinations = [
     [0, 1, 2],

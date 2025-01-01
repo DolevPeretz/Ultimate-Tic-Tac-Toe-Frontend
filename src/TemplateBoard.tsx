@@ -1,6 +1,17 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 
+// פונקציה כללית לבדיקה של ניצחון
+export const checkWinner = (board: any[], winningCombinations: number[][]): any | null => {
+  for (const combination of winningCombinations) {
+    const [a, b, c] = combination;
+    if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+      return board[a];
+    }
+  }
+  return null; // אין מנצח
+};
+
 interface BoardProps {
   items: any[];
   renderItem: (item: any, index: number) => React.ReactNode;

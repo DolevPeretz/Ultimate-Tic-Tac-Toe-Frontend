@@ -2,7 +2,6 @@ import { styled } from "@mui/material/styles";
 import { Box, Typography, Button } from "@mui/material";
 import { SxProps } from "@mui/system";
 
-
 export const squareButtonStyle: SxProps = {
   width: 50,
   height: 50,
@@ -41,6 +40,13 @@ export const Title = styled(Typography)(({ theme }) => ({
   fontWeight: "bold",
 }));
 
+export const TitleCurrentPlayer = styled(Typography)(({ theme }) => ({
+  fontSize: "1.2rem",
+  fontWeight: "bold",
+  margin: "10px 0",
+  color: "white",
+}));
+
 export const ResetButton = styled(Button)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
   ":hover": {
@@ -60,6 +66,3 @@ export const MainBoardContainer = styled(Box)(({ theme }) => ({
   borderRadius: "8px",
   backgroundColor: "rgba(195, 209, 252, 0.7)",
 }));
-
-
-

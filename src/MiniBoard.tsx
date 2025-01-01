@@ -7,7 +7,7 @@ interface MiniBoardProps {
   board: (Player | null)[];
   currentPlayer: Player;
   onUpdate: (newBoard: (Player | null)[]) => void;
-  isReset: boolean; // האם המשחק באיפוס
+  isReset: boolean; 
 }
 
 const MiniBoard: React.FC<MiniBoardProps> = ({
@@ -42,7 +42,7 @@ const MiniBoard: React.FC<MiniBoardProps> = ({
 
   useEffect(() => {
     if (isReset) {
-      setWinner(null); // איפוס המנצח
+      setWinner(null); 
     } else {
       const calculatedWinner = checkWinner(board);
       if (calculatedWinner) {
@@ -66,10 +66,10 @@ const MiniBoard: React.FC<MiniBoardProps> = ({
             ? "lightgreen"
             : winner === Player.O
             ? "red"
-            : "white",
+            : undefined,
         borderRadius: "12px",
         padding: "10px",
-        transition: "background-color 0.3s ease",
+        transition: "rgba(195, 209, 252, 0.7)",
       }}
     >
       <Board
