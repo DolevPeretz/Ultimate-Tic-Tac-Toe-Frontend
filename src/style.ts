@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 import { Box, Typography, Button } from "@mui/material";
 import { SxProps } from "@mui/system";
+import { Player } from "./PlayerEnum";
 
 export const squareButtonStyle: SxProps = {
   width: 50,
@@ -13,6 +14,16 @@ export const squareButtonStyle: SxProps = {
     backgroundColor: "#e0e0e0",
   },
 };
+export const MiniBoardContainer = styled(Box)<{ winner: Player | null }>(({ theme, winner }) => ({
+  backgroundColor: winner === Player.X 
+    ? "lightgreen" 
+    : winner === Player.O 
+    ? "red" 
+    : "transparent", 
+  borderRadius: "12px",
+  padding: theme.spacing(2),
+  transition: "background-color 0.3s ease",
+}));
 
 export const AppContainer = styled(Box)(({ theme }) => ({
   minHeight: "100vh",
@@ -35,10 +46,17 @@ export const HeaderContainer = styled(Box)(({ theme }) => ({
 }));
 
 export const Title = styled(Typography)(({ theme }) => ({
+  ...theme.typography.h3,
   color: "#FFFFFF",
   textAlign: "center",
   fontWeight: "bold",
 }));
+export const WinnerPlayer = styled(Typography)(({ theme }) => ({
+  fontWeight: "bold", 
+  color: 'rgba(123, 155, 250, 0.7)',
+}));
+
+
 
 export const TitleCurrentPlayer = styled(Typography)(({ theme }) => ({
   fontSize: "1.2rem",
@@ -49,10 +67,17 @@ export const TitleCurrentPlayer = styled(Typography)(({ theme }) => ({
 
 export const ResetButton = styled(Button)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
-  ":hover": {
+  color: theme.palette.primary.contrastText,
+  fontWeight: "bold",
+  textTransform: "uppercase",
+  padding: theme.spacing(1, 3),
+  borderRadius: theme.shape.borderRadius,
+  boxShadow: theme.shadows[2],
+  "&:hover": {
     backgroundColor: theme.palette.primary.dark,
   },
 }));
+
 
 export const MainBoardContainer = styled(Box)(({ theme }) => ({
   padding: "20px",

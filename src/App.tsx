@@ -8,6 +8,7 @@ import {
   HeaderContainer,
   Title,
   ResetButton,
+  TitleCurrentPlayer,
 } from "./style";
 
 const App: React.FC = () => {
@@ -15,7 +16,7 @@ const App: React.FC = () => {
     Array(9).fill(Array(9).fill(null))
   );
   const [currentPlayer, setCurrentPlayer] = useState<Player>(Player.X);
-  const [isReset, setIsReset] = useState(false); // האם המשחק באיפוס
+  const [isReset, setIsReset] = useState(false);
 
   const handleMove = (
     miniBoardIndex: number,
@@ -26,17 +27,16 @@ const App: React.FC = () => {
 
     setMainBoard(updatedMainBoard);
 
-    // עדכון השחקן הנוכחי
     setCurrentPlayer((prevPlayer) =>
       prevPlayer === Player.X ? Player.O : Player.X
     );
   };
 
   const resetGame = () => {
-    setMainBoard(Array(9).fill(Array(9).fill(null))); // איפוס הלוח הראשי
-    setCurrentPlayer(Player.X); // איפוס השחקן
-    setIsReset(true); // להפעיל את מצב האיפוס
-    setTimeout(() => setIsReset(false), 100); // להסיר את האיפוס לאחר זמן קצר
+    setMainBoard(Array(9).fill(Array(9).fill(null))); 
+    setCurrentPlayer(Player.X); 
+    setIsReset(true); 
+    setTimeout(() => setIsReset(false), 100); 
   };
 
   return (
@@ -44,22 +44,22 @@ const App: React.FC = () => {
       <CssBaseline />
       <AppContainer>
         <HeaderContainer>
-          <Title variant="h3">Ultimate-Tic-Tac-Toe</Title>
-          <ResetButton variant="contained" onClick={resetGame}>
+          <Title>Ultimate-Tic-Tac-Toe</Title>
+          <ResetButton onClick={resetGame}>
             Reset Game
           </ResetButton>
         </HeaderContainer>
 
-        {/* הצגת השחקן הנוכחי */}
-        <p style={{ fontSize: "1.2rem", fontWeight: "bold", margin: "10px 0" }}>
+        <TitleCurrentPlayer>
           The Current Player is: {currentPlayer}
-        </p>
+        </TitleCurrentPlayer>
 
         <MainBoard
           mainBoard={mainBoard}
           currentPlayer={currentPlayer}
           onMove={handleMove}
-          isReset={isReset} // העברת מידע על מצב האיפוס
+          isReset={isReset} 
+          onReset={resetGame} 
         />
       </AppContainer>
     </ThemeProvider>

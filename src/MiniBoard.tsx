@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Board from "./TemplateBoard";
 import Square from "./Square";
 import { Player } from "./PlayerEnum";
+import { MiniBoardContainer,WinnerPlayer } from "./style";
 
 interface MiniBoardProps {
   board: (Player | null)[];
@@ -58,19 +59,7 @@ const MiniBoard: React.FC<MiniBoardProps> = ({
   };
 
   return (
-    <div
-      style={{
-        backgroundColor:
-          winner === Player.X
-            ? "lightgreen"
-            : winner === Player.O
-            ? "red"
-            : undefined,
-        borderRadius: "12px",
-        padding: "10px",
-        transition: "background-color 0.3s ease",
-      }}
-    >
+    <MiniBoardContainer winner={winner}>
       <Board
         items={board}
         className="MiniBoard"
@@ -78,8 +67,8 @@ const MiniBoard: React.FC<MiniBoardProps> = ({
           <Square value={value} onClick={() => handleClick(index)} />
         )}
       />
-      {winner && <p style={{ fontWeight: "bold" }}>Winner: {winner}</p>}
-    </div>
+      {winner && <WinnerPlayer>Winner: {winner}</WinnerPlayer>}
+    </MiniBoardContainer>
   );
 };
 
