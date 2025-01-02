@@ -53,7 +53,7 @@ export const Title = styled(Typography)(({ theme }) => ({
 }));
 export const WinnerPlayer = styled(Typography)(({ theme }) => ({
   fontWeight: "bold", 
-  color: 'rgba(123, 155, 250, 0.7)',
+  color: '#1976d2',
 }));
 
 

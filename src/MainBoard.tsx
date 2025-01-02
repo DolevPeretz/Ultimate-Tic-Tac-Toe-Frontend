@@ -2,35 +2,15 @@ import React, { useEffect } from "react";
 import MiniBoard from "./MiniBoard";
 import { Player } from "./PlayerEnum";
 import { MainBoardContainer } from "./style";
+import { checkWinner } from "./TemplateBoard";
 
 interface MainBoardProps {
   mainBoard: (Player | null)[][];
   currentPlayer: Player;
   onMove: (miniBoardIndex: number, newMiniBoard: (Player | null)[]) => void;
   isReset: boolean;
-  onReset: () => void; 
+  onReset: () => void;
 }
-
-const getMiniBoardWinner = (miniBoard: (Player | null)[]): Player | null => {
-  const winningCombinations = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-
-  for (const combination of winningCombinations) {
-    const [a, b, c] = combination;
-    if (miniBoard[a] && miniBoard[a] === miniBoard[b] && miniBoard[a] === miniBoard[c]) {
-      return miniBoard[a];
-    }
-  }
-  return null;
-};
 
 const checkMainBoardWinner = (mainBoard: (Player | null)[][]): Player | null => {
   const winningCombinations = [
@@ -48,9 +28,9 @@ const checkMainBoardWinner = (mainBoard: (Player | null)[][]): Player | null => 
     const [a, b, c] = combination;
 
     const miniBoardWinners = [
-      getMiniBoardWinner(mainBoard[a]),
-      getMiniBoardWinner(mainBoard[b]),
-      getMiniBoardWinner(mainBoard[c]),
+      checkWinner(mainBoard[a], winningCombinations),
+      checkWinner(mainBoard[b], winningCombinations),
+      checkWinner(mainBoard[c], winningCombinations),
     ];
 
     if (
@@ -75,8 +55,10 @@ const MainBoard: React.FC<MainBoardProps> = ({
   useEffect(() => {
     const winner = checkMainBoardWinner(mainBoard);
     if (winner) {
-      alert(`Player ${winner} has won the game!`);
-      onReset(); 
+      setTimeout(() => {
+        alert(`Player ${winner} has won the game!`);
+        onReset(); 
+      }, 200); 
     }
   }, [mainBoard, onReset]);
 

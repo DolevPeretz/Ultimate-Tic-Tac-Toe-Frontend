@@ -1,20 +1,21 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
+import { Player } from "./PlayerEnum";
 
-export const checkWinner = (board: any[], winningCombinations: number[][]): any | null => {
+export const checkWinner = (board: (Player | null)[], winningCombinations: number[][]): Player | null => {
   for (const combination of winningCombinations) {
     const [a, b, c] = combination;
     if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-      return board[a];
+      return board[a]; 
     }
   }
   return null; 
 };
 
 interface BoardProps {
-  items: any[];
-  renderItem: (item: any, index: number) => React.ReactNode;
-  className?: string;
+  items: any[]; 
+  renderItem: (item: any, index: number) => React.ReactNode; 
+  className?: string; 
 }
 
 const Board: React.FC<BoardProps> = ({ items, renderItem, className }) => {
