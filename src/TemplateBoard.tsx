@@ -1,7 +1,6 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 
-// פונקציה כללית לבדיקה של ניצחון
 export const checkWinner = (board: any[], winningCombinations: number[][]): any | null => {
   for (const combination of winningCombinations) {
     const [a, b, c] = combination;
@@ -9,7 +8,7 @@ export const checkWinner = (board: any[], winningCombinations: number[][]): any 
       return board[a];
     }
   }
-  return null; // אין מנצח
+  return null; 
 };
 
 interface BoardProps {
