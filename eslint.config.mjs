@@ -18,30 +18,35 @@ export default [
         ecmaFeatures: {
           jsx: true,
         },
-        project: "./tsconfig.json", // ודאי שזה הנתיב הנכון לקובץ tsconfig שלך
+        project: "./tsconfig.json", 
       },
     },
     plugins: {
       "@typescript-eslint": tseslint,
       react: pluginReact,
-      prettier: pluginPrettier, // הוספת Prettier
+      prettier: pluginPrettier,
     },
     settings: {
       react: {
-        version: "detect", // מזהה אוטומטית את גרסת React
+        version: "detect",
       },
     },
     rules: {
-      ...tseslint.configs.recommended.rules, // חוקים עבור TypeScript
-      ...pluginReact.configs.recommended.rules, // חוקים עבור React
-      ...prettier.rules, // ביטול חוקים מתנגשים עם Prettier
-      "prettier/prettier": "error", // הפיכת שגיאות עיצוב לשגיאות ESLint
-      "react/react-in-jsx-scope": "off", // עבור React 17+
-      "react/prop-types": "off", // לא נדרש ב-TypeScript
+      ...tseslint.configs.recommended.rules,
+      ...pluginReact.configs.recommended.rules, 
+      ...prettier.rules, 
+      "prettier/prettier": "error", 
+      "react/react-in-jsx-scope": "off", 
+      "react/prop-types": "off", 
       "@typescript-eslint/no-unused-vars": [
         "error",
         { argsIgnorePattern: "^_" },
       ],
     },
+    extends: [
+      "airbnb",
+      "airbnb/hooks",
+      "prettier", 
+    ],
   },
 ];

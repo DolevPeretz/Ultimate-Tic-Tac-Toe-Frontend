@@ -13,8 +13,8 @@ export const checkWinner = (board: (Player | null)[], winningCombinations: numbe
 };
 
 interface BoardProps {
-  items: any[]; 
-  renderItem: (item: any, index: number) => React.ReactNode; 
+  items: (Player | null)[]; 
+  renderItem: (item: Player | null, index: number) => React.ReactNode; 
   className?: string; 
 }
 
